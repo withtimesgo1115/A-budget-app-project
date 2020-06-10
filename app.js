@@ -118,6 +118,22 @@ var UIController = (function(){
             document.querySelector(element).insertAdjacentHTML('beforeend',newHtml);
             
         },
+        
+        // here we defined a function to clear input space when current data has been registered
+        clearFields: function(){
+            var fields, fieldsArr;
+            fields = document.querySelectorAll(DOMstrings.inputDescription, + ',' + DOMstrings.inputValue);  
+            
+            fieldsArr = Array.prototype.slice.call(fields);
+            
+            fieldsArr.forEach(function(current, index, array){
+                current.value = "";
+            });
+            
+            // convert to the first element in the array
+            fieldsArr[0].focus();
+        },
+        
         // member method which can be used to acquire DOMstrings outside
         getDOMstrings: function(){
             return DOMstrings;
@@ -163,6 +179,8 @@ var controller = (function(budgetCtrl, UICtrl){
         // 3. Add the item to the UI
         UICtrl.addListItem(newItem, input.type);
         
+        // 4. Clear the fields
+        UICtrl.clearFields();
         // 4. Calculate the budget 
         
         // 5. Display the budget on the 

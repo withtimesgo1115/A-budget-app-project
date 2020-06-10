@@ -1,8 +1,15 @@
-/* IIFE(instant implement function expression) it can return an object very quickly and it can build a module that makes sense in separating different functions. */  
+/* IIFE(instant implement function expression) 
+it can return an object very quickly and 
+it can build a module that makes sense in 
+separating different functions. */  
 
-// budget controller
+//implement MVC strategy to code the webpage MVC means model, view and controller
+
+// budget controller which is the model part of MVC and it is responsible for operating all kinds of data
 var budgetController = (function(){
     
+    // define two key class using constructors: Expense and Income
+    // these two class both requires id, description and value to distinguish different item.
     var Expense = function(id, description, value){
         this.id = id;
         this.description = description;
@@ -28,8 +35,9 @@ var budgetController = (function(){
         }
     };
     
-    // 1 3 5 8 9
+    // access inner variables or objects with return sentence
     return {
+        // type means inc or exp
         addItem: function(type, des, val){
             var newItem, ID;
             
@@ -50,7 +58,7 @@ var budgetController = (function(){
             // push it into our data structure
             data.allItems[type].push(newItem);
             
-            // return the new element
+            // return the new element which ensures the newItem can be accessed outside
             return newItem;
         },
         
@@ -63,7 +71,7 @@ var budgetController = (function(){
 })();
 
 
-// UI controller
+// UI controller which is the view part
 var UIController = (function(){
     
     // define some useful attributes stored in an object
@@ -77,7 +85,7 @@ var UIController = (function(){
     };
     
     
-    // use closures to access private members
+    // use working scope to access private members
     return {
       getInput: function(){
           // return an object so that we can acquire these 3 parameters simultaneously
@@ -121,6 +129,7 @@ var UIController = (function(){
 
 // Global app controller
 // this module is used to make sure the former two modules can commnicate
+// this is the controller part in MVC
 var controller = (function(budgetCtrl, UICtrl){
     
     var setupEventListeners = function(){
@@ -167,7 +176,7 @@ var controller = (function(budgetCtrl, UICtrl){
         }
     };
     
-    
+    // pass former two functions here as parameters
 })(budgetController, UIController);
 
 
